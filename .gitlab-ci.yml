@@ -34,6 +34,7 @@ before_script:
   - eval $(ssh-agent -s)
   - ssh-keyscan $FQDN >> ~/.ssh/known_hosts
   - echo "$REMOTE_SSH_KEY" | tr -d '\r' | ssh-add -
+  - cat $ENV_FILE > .env
 
 
 frontend-job:       # This job runs in the build stage, which runs first.
