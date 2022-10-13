@@ -1,0 +1,63 @@
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3
+{
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: 1.25rem;
+	margin-bottom: 0;
+}
+
+.markdown-section h1
+{
+	text-align: left;
+	font-size: 1.40rem;
+	color: rgba(0, 0, 0, 0.90);
+  border-bottom: 1px solid hsla(210,18%,87%,1);
+}
+
+.markdown-section h2
+{
+	font-size: 1.10rem;
+	color: rgba(0, 0, 0, 0.80);
+}
+
+.markdown-section h3
+{
+	font-size: 0.75rem;
+	color: rgba(0, 0, 0, 0.60);
+}
+
+.markdown-section > p
+{
+	font-size: 1.00rem;
+	color: rgba(0, 0, 0, 0.70);
+}
+
+.markdown-section ul,
+.markdown-section ol
+{
+	margin-left: 0rem;
+  padding-left: 2em;
+}
+
+.markdown-section ul li > p,
+.markdown-section ol li > p {
+  display: inline;
+}
+
+.markdown-section ul > li
+{
+	color: rgba(0, 0, 0, 0.70);
+	font-size: 1rem;
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+.markdown-section ol > li
+{
+	color: rgba(0, 0, 0, 0.70);
+	font-size: 1rem;
+  padding-left: 5px;
+	list-style-position: inside;
+}

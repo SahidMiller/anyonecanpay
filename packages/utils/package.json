@@ -1,0 +1,73 @@
+{
+  "name": "@ipfs-flipstarter/utils",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./helpers": {
+      "import": "./dist/esm/utils.js",
+      "require": "./dist/cjs/utils.js"
+    },
+    "./electrum": {
+      "import": "./dist/esm/electrum.js",
+      "require": "./dist/cjs/electrum.js"
+    },
+    "./web-wallet": {
+      "import": "./dist/esm/web-wallet.js",
+      "require": "./dist/cjs/web-wallet.js"
+    },
+    "./external-wallet": {
+      "import": "./dist/esm/electron-cash.js",
+      "require": "./dist/cjs/electron-cash.js"
+    },
+    "./common": {
+      "import": "./dist/esm/flipstarter-common.js",
+      "require": "./dist/cjs/flipstarter-common.js"
+    },
+    "./ipfs": {
+      "import": "./dist/esm/ipfs.js",
+      "require": "./dist/cjs/ipfs.js"
+    }
+  },
+  "scripts": {
+    "build": "NODE_ENV=production run-s 'build:*'",
+    "build:clean": "shx rm -rf ./dist",
+    "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "build:extensions": "echo '{ \"type\":\"commonjs\"}' >> dist/cjs/package.json",
+    "postinstall": "yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-inject": "^4.0.4",
+    "@types/bl": "^5.0.2",
+    "ipfs": "^0.62.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.78.0",
+    "shx": "^0.3.4",
+    "tap": "^16.0.1",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@bitcoin-dot-com/bitcoincashjs2-lib": "^4.1.0",
+    "@ipld/dag-pb": "^2.1.17",
+    "@psf/bch-js": "^6.4.5",
+    "@psf/bitcoincashjs-lib": "^4.0.2",
+    "@scure/bip39": "^1.1.0",
+    "async-mutex": "^0.3.2",
+    "bip39": "^3.0.4",
+    "bitbox-sdk": "^8.11.2",
+    "cborg": "^1.9.4",
+    "debug": "^4.3.4",
+    "electrum-cash": "^2.0.10",
+    "interface-datastore": "^6.1.0",
+    "it-all": "^1.0.6",
+    "multiformats": "^9.9.0",
+    "uint8arrays": "^3.0.0"
+  }
+}

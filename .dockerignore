@@ -1,0 +1,13 @@
+.git
+.yarn
+**/node_modules
+
+.cert
+.vscode
+.docusaurus
+.env
+./website
+local
+
+**/dist
+**/build

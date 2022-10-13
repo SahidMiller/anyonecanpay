@@ -1,0 +1,11 @@
+{
+  "title":"Interplanetary Flipstarter",
+  "expires": 1641167999,
+  "image": "https://navbar.cloud.bitcoin.com/images/logo_black.png",
+  "recipients":[{
+      "name":"Test",
+      "address":"bitcoincash:qqflp5r0tr8l29y6h5vknpvhuf6hnyy4uuv43aphgu",
+      "satoshis":12000000000
+  }],
+  "description": "Test\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\n\nTest\n\nShould not be visible"
+}

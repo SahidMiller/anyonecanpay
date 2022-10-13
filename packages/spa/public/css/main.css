@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Fonts **/
+@font-face {
+  font-display: swap;
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cairo"), local("Cairo-Regular"),
+  url("../fonts/cairo.woff2")
+  format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+  U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+  U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "icons";
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  src: url("../fonts/icons.woff")
+  format("woff");
+}
+
+/* Material icons packages with icomoon */
+[class^="icon-"], [class*=" icon-"]
+{
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icons' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	font-size: 1.5rem;
+	line-height: 1.25;
+	margin-top: -0.15rem;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.leftarrow:before { content: "\003c" }
+.icon-report_problem:before { content: "\e900"; }
+.icon-chat:before { content: "\e901"; }
+.icon-chat_bubble_outline:before { content: "\e902"; }
+.icon-email:before { content: "\e903"; }
+.icon-access_time:before { content: "\e904"; }
+.icon-attach_money:before { content: "\e905"; }
+.icon-download:before { content: "\e90e"; }
+.icon-security:before { content: "\e906"; }
+.icon-person_outline:before { content: "\e907"; }
+.icon-bookmark_border:before { content: "\e908"; }
+.icon-code:before { content: "\e909"; }
+.icon-face:before { content: "\e90a"; }
+.icon-favorite_border:before { content: "\e90b"; }
+.icon-info:before { content: "\e90c"; }
+.icon-translate:before { content: "\e90d"; }
+.icon-label:before { content: "\e90f"; }
+.icon-share:before { content: "\e910"; }
+.icon-help:before { content: "\e911"; }
+.icon-nightlife:before { content: "\e912"; }
+.icon-downarrow:before { content: "\02ec"; }
+.icon-bitcoin:before { content: "\e913"; }
+.icon-dollar:before { content: "\e905"; }
+.icon-usd:before { content: "\e905"; }
+.icon-bitcoin:before { content: "\e913"; }
+.icon-btc:before { content: "\e913"; }
+.icon-bch:before { content: "\e913"; }
+
+.down-arrow:before { content: "▼"; }
+.up-arrow:before { content: "▲"; }

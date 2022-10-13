@@ -1,0 +1,9 @@
+node_modules
+dist
+
+.env
+.env.dev
+.nyc_output
+coverage
+storybook-static
+stats.html

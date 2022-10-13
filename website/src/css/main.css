@@ -1,0 +1,81 @@
+.homepage h1 {
+  @apply font-display;
+
+  line-height: 1.2;
+  font-weight: 500;
+  font-size: 2.1875rem;
+  letter-spacing: -0.01em;
+}
+
+.homepage h2 {
+  font-weight: 400;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.homepage .hero-container h2 {
+  font-size: 1.1625rem;
+  line-height: 1.6rem;
+}
+
+@media (min-width: 480px) {
+  
+  .homepage .hero-container h2 {
+    font-size: 1.375rem;
+    font-weight: 200;
+    font-family: 'inter', sans-serif;
+    line-height: 2rem;
+  }
+
+  .homepage .hero-container {
+    margin-top: 5vh;
+    padding: 0 10%;
+  }
+}
+
+@media (min-width: 640px) {
+  .homepage h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .homepage .hero-container {
+    margin-top: 15vh;
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage .hero-container {
+    margin-top: 23vh;
+    z-index: 2;
+  }  
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+#toggle-animation {
+  background-color: rgba(6, 27, 45, 0.6);
+  min-width: initial;
+  border: none;
+  color: #8c9aa2;
+  z-index: 2;
+
+  /* &:hover {
+    @apply text-blueGreenLight;
+  } */
+}
+
+@media (max-width: 420px) {
+  #stars {
+    min-height: 44rem;
+  }
+}

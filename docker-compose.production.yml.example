@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+  nginx:
+    image: nginx:1.23.1-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${DOCKER_VOLUMES_ROOT}/nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template
+      - ${DOCKER_VOLUMES_ROOT}/nginx/ssl.conf:/etc/nginx/includes/ssl.conf
+      - ${DOCKER_VOLUMES_ROOT}/nginx/certs:/etc/nginx/certs/
+    environment:
+      - DOMAIN=${FQDN}
+      - HTTPS_ONLY=${HTTPS_ONLY:-1}
+    depends_on:
+      - spa
+      - backend
+    restart: always
+
+  spa:
+    image: sahidmiller/ipfs-flipstarter-gateway:latest
+    volumes: 
+      - ${DOCKER_VOLUMES_ROOT}/dnscontrol/dnscontrol.sh:/container-init.d/dnscontrol.sh
+      - ${DOCKER_VOLUMES_ROOT}/dnscontrol/resources/:/etc/dnscontrol/
+    environment:
+      - NAMECHEAP_API_USER=${NAMECHEAP_API_USER}
+      - NAMECHEAP_API_KEY=${NAMECHEAP_API_KEY}
+    restart: always
+  
+  backend:
+    image: sahidmiller/ipfs-flipstarter-backend:latest
+    restart: always

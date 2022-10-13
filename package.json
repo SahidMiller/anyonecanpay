@@ -1,0 +1,42 @@
+{
+  "name": "ipfs-flipstarter",
+  "version": "0.0.1",
+  "description": "Decentralized Crowdfunding using IPFS and BitcoinCash",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://gitlab.com/ipfs-flipstarter/ipfs-flipstarter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ipfs-flipstarter/ipfs-flipstarter.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/ipfs-flipstarter/ipfs-flipstarter/issues"
+  },
+  "engines": {
+    "npm": ">=7.0.0"
+  },
+  "private": true,
+  "scripts": {
+    "link": "lerna link",
+    "reset": "lerna run clean && rimraf packages/*/node_modules node_modules package-lock.json packages/*/package-lock.json",
+    "test": "lerna run test",
+    "coverage": "lerna run coverage",
+    "build": "lerna run build",
+    "clean": "lerna run clean",
+    "lint": "lerna run lint",
+    "pack:spa": "ipfs-car --pack ./packages/spa/dist/ --output spa.car --wrapWithDirectory false"
+  },
+  "devDependencies": {
+    "ipfs": "^0.62.1",
+    "ipfs-car": "^0.8.1",
+    "lerna": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "shx": "^0.3.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "resolutions": {
+    "create-hash": "1.2.0"
+  }
+}

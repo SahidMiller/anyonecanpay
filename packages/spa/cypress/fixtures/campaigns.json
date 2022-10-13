@@ -1,0 +1,120 @@
+{
+  "0.0.0": {
+    "campaign": {
+      "slug": "test",
+      "title": "Test",
+      "starts": 1652241600,
+      "expires": 1652328000,
+      "recipients": [
+        {
+          "name": "Test",
+          "url": "",
+          "image": "",
+          "address": "bitcoincash:qr9f5gflevlvt94etdh2rp078uefegtjkyahxkrpgh",
+          "signature": null,
+          "satoshis": 2000
+        }
+      ],
+      "contributions": [],
+      "fullfilled": false,
+      "fullfillmentTx": null,
+      "fullfillmentTimestamp": null,
+      "descriptions": {
+        "en": {
+          "abstract": "Test",
+          "proposal": "Test"
+        },
+        "es": {
+          "abstract": "",
+          "proposal": ""
+        },
+        "zh": {
+          "abstract": "",
+          "proposal": ""
+        },
+        "ja": {
+          "abstract": "",
+          "proposal": ""
+        }
+      },
+      "apiType": "electrum"
+    },
+    "config": {
+      "defaultGatewayUrl": "https://dweb.link",
+      "preloadNodes": [
+        {
+          "url": "https://node0.preload.ipfs.io",
+          "multiaddr": ""
+        },
+        {
+          "url": "https://node1.preload.ipfs.io",
+          "multiaddr": ""
+        },
+        {
+          "url": "https://node2.preload.ipfs.io",
+          "multiaddr": ""
+        },
+        {
+          "url": "https://node3.preload.ipfs.io",
+          "multiaddr": ""
+        },
+        {
+          "url": "https://flipstarter.me",
+          "multiaddr": "/dns4/flipstarter.me/tcp/443/wss/p2p/12D3KooWHPSQJQhEzsDtUeJzm49KoAbsYJa2vBboPiEXiQuR1ckC"
+        }
+      ]
+    }
+  },
+  "0.0.1": {
+    "defaultGatewayUrl": "https://flipstarter.me",
+    "description": "Test",
+    "title": "Test",
+    "image": "https://flipstarter.paytaca.com/images/paytaca-app-header.png",
+    "expires": 1660262399,
+    "recipients": [
+      {
+        "name": "Test",
+        "address": "bitcoincash:qqelqjll7xccnnnjrvz03mp8gzyz5glwvqflkj957v",
+        "satoshis": 100000000
+      }
+    ],
+    "preloadNodes": [
+      {
+        "multiaddr": "",
+        "url": "https://node0.preload.ipfs.io"
+      },
+      {
+        "multiaddr": "",
+        "url": "https://node1.preload.ipfs.io"
+      },
+      {
+        "multiaddr": "",
+        "url": "https://node2.preload.ipfs.io"
+      },
+      {
+        "multiaddr": "",
+        "url": "https://node3.preload.ipfs.io"
+      },
+      {
+        "multiaddr": "/dns4/flipstarter.me/tcp/443/wss/p2p/12D3KooWHPSQJQhEzsDtUeJzm49KoAbsYJa2vBboPiEXiQuR1ckC",
+        "url": "https://flipstarter.me"
+      }
+    ],
+    "clientConfig": {
+      "cid": "QmYpXnhxLmCKJF3pwPo9VkEKrifrtvxetMCUn91QuiVfde",
+      "ipns": "k51qzi5uqu5djrim5s9504kowmxmgexhf03sgdgqkefn0afou0kj1gdhz8ncjw",
+      "record": "CjQvaXBmcy9RbVlwWG5oeExtQ0tKRjNwd1BvOVZrRUtyaWZydHZ4ZXRNQ1VuOTFRdWlWZmRlEkCExGYHaDbV0bmJ8knrcy43IDZv0F2O6KQ/QB1aNtvGz2XQTh14mB/DD3qrmJaH35L5pq7rhjZTxpmS0dOAekwJGAAiHjIwMjItMDgtMTFUMTk6MTQ6NDMuOTA4MjUwOTg2WigGMABCQMM67WzdDBnTlbM9c0OHlyF21g03+v/iP4s28WrGB206CO5UL6P06i+UUEbLd5yNdtxQaT+8HAKzFxFLuuSf9ApKgwGlY1RUTABlVmFsdWVYNC9pcGZzL1FtWXBYbmh4TG1DS0pGM3B3UG85VmtFS3JpZnJ0dnhldE1DVW45MVF1aVZmZGVoU2VxdWVuY2UGaFZhbGlkaXR5WB4yMDIyLTA4LTExVDE5OjE0OjQzLjkwODI1MDk4NlpsVmFsaWRpdHlUeXBlAA=="
+    },
+    "hash": "bafybeiazytxudu3xvw25bri34zf777demqjbz5fyhg5u4iufrljmalq6lm",
+    "url": "https://flipstarter.me/ipfs/bafybeiazytxudu3xvw25bri34zf777demqjbz5fyhg5u4iufrljmalq6lm",
+    "download": "blob:https://create.flipstarter.me/8f105e00-a853-4197-916c-b08f035c6d39",
+    "successfulPreloadNodeIndexes": [
+      2,
+      0,
+      1,
+      3,
+      4
+    ],
+    "id": "bafybeiazytxudu3xvw25bri34zf777demqjbz5fyhg5u4iufrljmalq6lm"
+  }
+}

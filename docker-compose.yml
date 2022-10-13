@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+
+  nginx:
+    image: nginx:1.23.1-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${DOCKER_VOLUMES_ROOT}/nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template
+      # - ${DOCKER_VOLUMES_ROOT}/nginx/ssl.conf:/etc/nginx/includes/ssl.conf
+      # - ${DOCKER_VOLUMES_ROOT}/nginx/certs/:/etc/nginx/certs/
+    environment:
+      - FQDN=${FQDN}
+      - HTTPS_ONLY=${HTTPS_ONLY:-0}
+      - IPFS_LIBP2P_KEY=${IPFS_LIBP2P_KEY}
+    depends_on:
+      - spa
+      - backend
+    restart: always
+
+  # FLIPSTARTER WEB APPLICATION / IPFS
+  spa:
+    image: sahidmiller/ipfs-flipstarter-gateway:latest
+    build:
+      context: .
+      dockerfile: ./docker/spa.Dockerfile
+      target: ipfs
+      args:
+        FQDN: ${FQDN}
+        IPFS_PEER_ID: ${IPFS_PEER_ID}
+        DEFAULT_API_URL: ${DEFAULT_API_URL}
+        DEFAULT_API_MULTIADDR: ${DEFAULT_API_MULTIADDR}
+        DEFAULT_GATEWAY_URL: ${DEFAULT_GATEWAY_URL}
+        ELECTRUM_SERVERS: ${ELECTRUM_SERVERS}
+        SIGNING_NODE_ADDRESS: ${SIGNING_NODE_ADDRESS}
+        SIGNING_NODE_WIF: ${SIGNING_NODE_WIF}
+        DOCKER_VOLUMES_ROOT: ${DOCKER_VOLUMES_ROOT}
+    volumes:
+      # Mount for development
+      - ./packages/spa/dist:/root/
+    ports:
+      - 8083:8080 # Gateway
+      - 5081:5001 # Api
+      - 4081:4001 # TCP/UDP Libp2p
+      - 4082:4002 # WS Libp2p
+    environment:
+      - IPFS_PRIVATE_KEY=${IPFS_PRIVATE_KEY}
+      - IPFS_PEER_ID=${IPFS_PEER_ID}
+      - USE_SUBDOMAINS=${USE_SUBDOMAINS:-true}
+      - FQDN=${FQDN}
+
+  # FLIPSTARTER BACKEND API
+  backend:
+    image: sahidmiller/ipfs-flipstarter-backend:latest
+    build:
+      context: .
+      dockerfile: ./docker/backend.Dockerfile
+      target: backend
+    ports:
+      - 8088:8088
+    depends_on:
+      - spa

@@ -1,0 +1,79 @@
+# This file is a template, and might need editing before it works on your project.
+# This is a sample GitLab CI/CD configuration file that should run without any modifications.
+# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
+# it uses echo commands to simulate the pipeline execution.
+#
+# A pipeline is composed of independent jobs that run scripts, grouped into stages.
+# Stages run in sequential order, but jobs within stages run in parallel.
+#
+# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
+#
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+#
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - deploy
+
+image: docker
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+before_script:
+  - chmod +x ci/setup-ssh.sh
+  - ci/setup-ssh.sh
+  - eval $(ssh-agent -s)
+  - ssh-keyscan $FQDN >> ~/.ssh/known_hosts
+  - echo "$REMOTE_SSH_KEY" | tr -d '\r' | ssh-add -
+
+
+frontend-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+    - docker compose build spa
+    - docker compose push spa
+  only:
+    refs:
+      - feat/sprint
+      - master
+    changes:
+      - packages/spa/*
+      - packages/utils/*
+      - Dockerfile.spa
+
+backend-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+    - docker compose build backend
+    - docker compose push backend --ignore-push-failures
+  only:
+    refs:
+      - feat/sprint
+      - master
+    changes:
+      - packages/backend/*
+      - packages/utils/*
+      - Dockerfile.backend
+
+deploy-staging:
+  stage: deploy
+  script:
+    - ssh ${SSH_HOST} "cd $DOCKER_VOLUMES_ROOT && docker-compose pull && docker-compose down && docker-compose up -d --force-recreate"
+  only:
+    refs:
+      - feat/sprint
+      - master
+  environment:
+    name: staging
+    url: https://${FQDN}

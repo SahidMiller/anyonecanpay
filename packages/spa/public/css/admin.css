@@ -1,0 +1,162 @@
+.bg-navy {
+  background-color: #0b3a53;
+}
+
+.b--navy, .border-navy {
+  border-color: #0b3a53;
+}
+
+.navbar-item-active {
+  border-bottom: 5px solid rgba(201, 210, 215, .4);
+}
+
+.navbar-item-active * {
+  opacity: 100;
+}
+
+@media only screen and (min-width: 1024px) {
+  .navbar-container {
+    width: 9.25rem;
+  }
+  .navbar-item-active {
+    border-left: 5px solid rgba(201, 210, 215, .4);
+    border-bottom: 0;
+  }
+}
+
+@media only screen and (min-height: 49em) and (min-width: 1024px) {
+  .navbar-logo-vert {
+    padding-bottom: 1rem;
+  }
+  .navbar-item {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .navbar-footer {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-height: 40em) {
+  .navbar-footer {
+    display: none !important;
+  }
+}
+
+.navbar-logo {
+  width: 200px;
+}
+
+@media (min-width: 1024px) {
+  .navbar-logo {
+    width:130px;
+  }
+}
+
+
+#no-campaigns-message {
+  text-align: center;
+  margin-top: 100px;
+}
+
+#content-container {
+  margin-bottom: 50px;
+}
+
+#campaigns .campaign-card-grid > div {
+  position: absolute;
+}
+
+#campaigns .card {
+    font-weight: 400;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+#campaigns .card-head {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    bottom: 160px;
+    text-align: right;
+}
+
+#campaigns .card {
+  cursor: pointer;
+}
+
+#campaigns .card-title {
+  font-size: 1.4rem;
+}
+
+#campaigns .card-footer {
+  background-color: rgb(255, 255, 255); 
+  padding: 0px;
+}
+
+.card-border-top {
+  border-radius: 40px!important;
+}
+
+.card-image-border {
+  align-self: center;
+}
+
+.Ripple {
+  top: 0px; 
+  left: 0px; 
+  width: 0px; 
+  height: 0px;
+}
+
+.Ripple-parent {
+  touch-action: unset;
+  display: flex;
+  justify-content: center;
+  height: 250px;
+  border: none;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-project-category {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    font-size: .9rem;
+    padding: .2rem;
+    width: 7rem;
+    background-color: #ffca79;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.card-progress-bar {
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+
+.donations {
+  font-size: .875rem;
+  color: #707070;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-funding, .card-goal {
+  width: 50%;
+}
+
+form input[readonly] {
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity))
+}
+
+.simple-mde.readonly .CodeMirror {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity))
+}
