@@ -30,7 +30,7 @@ export default function RefundUtxo({ utxo, onRefunded, setPrimaryButtonData }) {
     setPrimaryButtonData?.({
       onClick: makeRefundRef.current,
       text: refundUtxoMutation.isSuccess ? "Done!" : refundUtxoMutation.isLoading ? "Loading..." : "Refund",
-      disabled: !refundAddress
+      disabled: !refundAddress || refundUtxoMutation.isLoading || refundUtxoMutation.isSuccess
     });
   }, [setPrimaryButtonData, refundAddress, refundUtxoMutation]);
 
