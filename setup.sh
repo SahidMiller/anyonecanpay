@@ -1,0 +1,1 @@
+docker run sahidmiller/ipfs-key >> .env
