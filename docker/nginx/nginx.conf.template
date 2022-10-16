@@ -1,33 +1,30 @@
-map $scheme $do_redirect {
-	https 0;
-  default $HTTPS_ONLY;
-}
-
 # Root for ipfs path gateway and websockets (tld)
 server {
 
 	root /var/www/html;
 
-  server_name $FQDN .ipfs.$FQDN;
+  server_name $FQDN;
 
-	# Development helper for ipns
-	location ~* ^/(.*)$ {
-		proxy_pass http://spa:8080/ipns/k51qzi5uqu5dizigoj09dtj8ix4popcd0ixhkg9oapcw9prrqh8sochm0fu8l1/$1$is_args$args;
+	# DNSLink alternative
+	location ~* ^/(?!ipfs|ipns|p2p|api)(.*)$ {
+		proxy_pass http://spa:8080/ipns/$IPFS_LIBP2P_KEY/$1$is_args$args;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header Host $host;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header X-Forwarded-Proto "https";
+		proxy_set_header X-Forwarded-Proto $scheme;
 	}
 
-	# Ipfs Gateway
-	location / {
+	# Ipfs Gateway Redirects
+	location ~* ^/(ipfs|ipns)\/?.*$ {
 		proxy_pass http://spa:8080;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header Host $host;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		proxy_set_header X-Forwarded-Proto "https";
+		
+		# HTTP if behind reverse-proxy, HTTPS if exposed to 80/443
+		proxy_set_header X-Forwarded-Proto $scheme;
 	}
-	
+
 	# Ipfs Libp2p
 	location /p2p {
 		proxy_pass http://spa:4002;
@@ -49,12 +46,27 @@ server {
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_http_version 1.1;
 	}
+
+	listen 80;
+}
+
+# Root for ipfs path gateway and websockets (tld)
+server {
+
+	root /var/www/html;
+
+  server_name .ipfs.$FQDN;
+
+	# Ipfs Gateway
+	location / {
+		proxy_pass http://spa:8080;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		
+		# HTTP if behind reverse-proxy, HTTPS if exposed to 80/443
+		proxy_set_header X-Forwarded-Proto $scheme;
+	}
 	
 	listen 80;
-	
-	include /etc/nginx/includes/ssl.*;
-
-	if ($do_redirect = 1) {
-		return 301 https://$host$request_uri;
-	}
 }
