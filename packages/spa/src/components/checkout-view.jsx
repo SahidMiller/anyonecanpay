@@ -93,7 +93,7 @@ export default function Checkout({ donationAmount, alias, comment, refundTimesta
     setPrimaryButtonData?.({
       onClick: makePledgeRef.current,
       text: madePledge ? "Done!" : makingPledge ? "Loading..." : isFullfillment ? "Fullfill" : "Pledge",
-      disabled: !ready
+      disabled: !ready || makingPledge || madePledge
     });
   }, [setPrimaryButtonData, makePledgeRef, madePledge, makingPledge, ready, isFullfillment]);
 
@@ -163,7 +163,7 @@ export default function Checkout({ donationAmount, alias, comment, refundTimesta
 }
 
 function getStatus(pledgeMutation) {
-  let statusText = "Ready to pledge!";
+  let statusText = ""
 
   if (pledgeMutation.pledgeStatus === "setup") {
     statusText = "Creating setup transaction"
@@ -172,17 +172,21 @@ function getStatus(pledgeMutation) {
   } else if (pledgeMutation.pledgeStatus === "notification") {
     statusText = "Creating notification transaction"
   } else if (pledgeMutation.pledgeStatus === "fullfillment") {
-    statusText = "Creating fullfillment transaction!"
+    statusText = "Creating fullfillment transaction"
   } else if (pledgeMutation.pledgeStatus === "setup.broadcast") {
     statusText = "Broadcasting setup transaction"
   } else if (pledgeMutation.pledgeStatus === "notification.broadcast") {
     statusText = "Broadcasting notification transaction"
   } else if (pledgeMutation.pledgeStatus === "fullfillment.broadcast") {
-    statusText = "Broadcasting fullfillment transaction!"
+    statusText = "Broadcasting fullfillment transaction"
   } else if (pledgeMutation.pledgeStatus === "lock") {
     statusText = "Locking committed utxo"
   } else if (pledgeMutation.isSuccess) {
     statusText = "Pledge successful!"
+  } else if (pledgeMutation.isLoading) {
+    statusText = "Loading pledge data"
+  } else {
+    statusText = "Ready to pledge!"
   }
 
   return statusText;
