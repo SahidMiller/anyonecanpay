@@ -36,7 +36,6 @@ services:
         ELECTRUM_SERVERS: ${ELECTRUM_SERVERS}
         SIGNING_NODE_ADDRESS: ${SIGNING_NODE_ADDRESS}
         SIGNING_NODE_WIF: ${SIGNING_NODE_WIF}
-        DOCKER_VOLUMES_ROOT: ${DOCKER_VOLUMES_ROOT}
     volumes:
       # Mount for development
       - ./packages/spa/dist:/root/

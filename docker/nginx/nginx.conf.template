@@ -7,9 +7,15 @@ server {
 
 	# DNSLink alternative
 	location ~* ^/(?!ipfs|ipns|p2p|api)(.*)$ {
+		#Uncomment when USE_SUBDOMAINS=true
+		#proxy_pass http://spa:8080/$1$is_args$args;
+		#proxy_set_header Host $IPFS_LIBP2P_KEY.ipns.$host;
+		
+		#Uncomment when USE_SUBDOMAINS=false
 		proxy_pass http://spa:8080/ipns/$IPFS_LIBP2P_KEY/$1$is_args$args;
-		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header Host $host;
+		
+		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header X-Forwarded-Proto $scheme;
 	}
