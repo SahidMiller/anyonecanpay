@@ -48,8 +48,8 @@ frontend-job:       # This job runs in the build stage, which runs first.
       - feat/sprint
       - master
     changes:
-      - packages/spa/*
-      - packages/utils/*
+      - packages/spa/**/*
+      - packages/utils/**/*
       - Dockerfile.spa
 
 backend-job:       # This job runs in the build stage, which runs first.
@@ -63,8 +63,8 @@ backend-job:       # This job runs in the build stage, which runs first.
       - feat/sprint
       - master
     changes:
-      - packages/backend/*
-      - packages/utils/*
+      - packages/backend/**/*
+      - packages/utils/**/*
       - Dockerfile.backend
 
 deploy-staging:
