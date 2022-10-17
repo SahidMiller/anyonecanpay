@@ -85,17 +85,34 @@ export default function Checkout({ donationAmount, alias, comment, refundTimesta
   const [availableAmountText, availableAmountDenomination] = prettyPrintSats(availableAmount);
   const [requestingAmountText, requestingAmountDenomination] = prettyPrintSats(requestingAmount);
   const [feesAmountText] = prettyPrintSats(feesAmount);
-  
-  const makePledgeRef = useRef();
-  makePledgeRef.current = pledgeMutation.mutateAsync;
+  const [clickedPledged, setClickedPledged] = useState(false);
+
+  useEffect(() => {
+    setClickedPledged(false);
+  }, [userRefundAddress])
 
   useEffect(() => {
     setPrimaryButtonData?.({
-      onClick: makePledgeRef.current,
+      onClick: async () => {
+        if ((!previousAddress || !userRefundAddress || !userRefundAddressDirty) && !clickedPledged) {
+          setClickedPledged(true);
+        } else {
+          setClickedPledged(false);
+          await pledgeMutation.mutateAsync();
+        }
+      },
       text: madePledge ? "Done!" : makingPledge ? "Loading..." : isFullfillment ? "Fullfill" : "Pledge",
       disabled: !ready || makingPledge || madePledge
     });
-  }, [setPrimaryButtonData, makePledgeRef, madePledge, makingPledge, ready, isFullfillment]);
+  }, [
+    setPrimaryButtonData, 
+    pledgeMutation.mutateAsync, 
+    (!previousAddress || !userRefundAddress || !userRefundAddressDirty) && !clickedPledged,
+    madePledge, 
+    makingPledge, 
+    ready, 
+    isFullfillment
+  ]);
 
   function onCopyAddress(e) {
     copyAddressToClipboard();
@@ -153,11 +170,13 @@ export default function Checkout({ donationAmount, alias, comment, refundTimesta
       </div> 
     </CheckoutGrid>
     {(!!ready || makingPledge || madePledge) && <div class="pb-4">
-        <div className="my-4 text-sm font-bold">Send refund to what address if the campaign expires? <small>(leave blank if none)</small></div>
+        <div className="my-4 text-sm font-bold">Auto-refund address if campaign expires: </div>
         <div class="flex relative border rounded m-1 text-gray-500 pt-6 px-4 pb-2 ">
-          <input defaultValue={previousAddress} class="w-full peer text-black outline-0" id="alias" type="text" name="alias" placeholder="&nbsp;" onChange={onRefundAddressChanged}></input>
+          <input disabled={makingPledge || madePledge} defaultValue={previousAddress} class="w-full peer text-black outline-0" id="alias" type="text" name="alias" placeholder="&nbsp;" onChange={onRefundAddressChanged}></input>
           <FloatingLabel for="alias" className="absolute top-1 left-4 translate-y-3 bg-transparent">Address</FloatingLabel>
         </div>
+        {!!clickedPledged && !userRefundAddressDirty && !!previousAddress && <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: if this address originated from an <strong>exchange</strong>, change it before pledging.</div> }
+        {!!clickedPledged && !!userRefundAddressDirty && !userRefundAddress && <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: empty refund address! You will have to manually revoke using the private key above.</div> }
     </div> }
   </>
 }
