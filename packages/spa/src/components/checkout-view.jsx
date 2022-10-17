@@ -175,8 +175,21 @@ export default function Checkout({ donationAmount, alias, comment, refundTimesta
           <input disabled={makingPledge || madePledge} defaultValue={previousAddress} class="w-full peer text-black outline-0" id="alias" type="text" name="alias" placeholder="&nbsp;" onChange={onRefundAddressChanged}></input>
           <FloatingLabel for="alias" className="absolute top-1 left-4 translate-y-3 bg-transparent">Address</FloatingLabel>
         </div>
-        {!!clickedPledged && !userRefundAddressDirty && !!previousAddress && <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: if this address originated from an <strong>exchange</strong>, change it before pledging.</div> }
-        {!!clickedPledged && !!userRefundAddressDirty && !userRefundAddress && <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: empty refund address! You will have to manually revoke using the private key above.</div> }
+        {!!clickedPledged && 
+          //If it has a previous address
+          !!previousAddress && 
+          //And refund address isn't dirty or equals previous address
+          (!userRefundAddressDirty || previousAddress === userRefundAddress) && 
+          // Then display exchange warning.
+          <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: this default return address sent funds to this wallet. If it is an <strong>exchange address</strong>, change it before pledging.</div> }
+          
+        {!!clickedPledged && (
+          // If no userRefundAddress (when dirty)
+          (!!userRefundAddressDirty && !userRefundAddress) || 
+          // Or if no previousAddress (when pristine)
+          (!userRefundAddressDirty && !previousAddress)) && 
+          // Then display no address warning.
+          <div class="ml-2 text-md text-red-500"><span className="underline">Caution</span>: empty refund address! You will have to manually revoke using the private key above.</div> }
     </div> }
   </>
 }
